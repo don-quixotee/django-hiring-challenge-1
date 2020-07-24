@@ -48,6 +48,6 @@ def scrape(request):
 
 def clear(request):
 
-    Link.objects.all().delete()
+    Scrawler.objects.all().delete()
 
     return render(request, 'crawl.html')

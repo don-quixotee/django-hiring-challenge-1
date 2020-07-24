@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from crawl.views import scrape
+from crawl.views import scrape, clear
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', scrape, name='scrape')
+    path('', scrape, name='scrape'),
+    path('delete/', clear, name='delete')
 ]
