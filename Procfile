@@ -1,1 +1,1 @@
-web: gunicorn crawlBot.wsgi
+web: gunicorn crawlBot.wsgi --log-file -
