@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +7,34 @@
     <title>crawlBot</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+
+
+    <style>
+      table {
+        counter-reset: rowNumber;
+      }
+      
+      table tr {
+        counter-increment: rowNumber;
+      }
+      
+      table tr td:first-child::before {
+        content: counter(rowNumber);
+        min-width: 1em;
+        margin-right: 0.5em;
+      }
+
+      .search{
+        background-color: whitesmoke;
+      }
+      .search input[type=text]{
+        width: 100%;
+        height: 50px;
+        margin-top: 100px;
+        margin-bottom: 30px;
+      }
+      
+    </style>
 </head>
 <body>
     <!-- Image and text -->
@@ -16,42 +45,56 @@
     </a>
   </nav>
 
-    <div style="padding-top:5%"  class="container">
+    <div style="padding-top:5%"  class="container search ">
 
-        <form method="GET">
+        <form method="POST">
             {% csrf_token %}
             <input type="text" name="site" id="site" placeholder="enter site address">
-            <button type="submit">Scrape</button>
+
+            <div class="mx-auto text-center">
+              <button id="button" name="button" type="submit" class="btn btn-outline-dark">Scrawl!</button>
+          </div>
+
+
+
             <a href="/delete">Delete</a>
         </form>
 
     </div>
 
 
-    <table  class="table table-hover" style="padding:20px">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">visit</th>
-         
-          </tr>
-        </thead>
-        <tbody>
-        {% for link in data %}
 
-          <tr>
-            <th scope="row">{{link.id}}</th>
-            <td>{{ link.name }}</td>
-            <td>{{ link.webUrl }}</td>
-            <td><a href="{{link.webUrl}}"><button class="btn-sm btn-outline-secondery">visit</button> </a></td>
-          </tr>
-          {% endfor %}
+{% if data %}
+<table  class="table table-hover " style="padding:20px" border="1">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">visit</th>
+   
+    </tr>
+  </thead>
+  <tbody>
+  {% for link in data %}
 
-        </tbody>
-      </table>
+    <tr>
+      <td></td>
+      <td>{{ link.name }}</td>
+      <td>{{ link.webUrl }}</td>
+      <td><a href="{{link.webUrl}}"><button class="btn-sm btn-outline-secondery">visit</button> </a></td>
+    </tr>
+    {% endfor %}
 
+  </tbody>
+</table>
+
+
+<h4> total links  on this page : {{linkCount}}</h4>
+
+
+{% endif %}
+ 
 
 
 

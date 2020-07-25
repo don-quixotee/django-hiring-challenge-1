@@ -42,12 +42,13 @@ def scrape(request):
 
     else:
 
-        data = Scrawler.objects.all()
+        data = Scrawler.objects.all()[:100]
+        linkCount = Scrawler.objects.all().count()
 
-        return render(request, 'crawl.html', {'data': data})
+        return render(request, 'crawl.html', {'data': data, 'linkCount':linkCount})
 
 def clear(request):
 
     Scrawler.objects.all().delete()
 
-    return render(request, 'crawl.html')
+    return HttpResponseRedirect('/')
