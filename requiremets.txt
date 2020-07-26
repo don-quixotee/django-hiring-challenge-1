@@ -10,7 +10,9 @@ constantly==15.1.0
 cryptography==3.0
 cssselect==1.1.0
 dj-database-url==0.5.0
+dj-static==0.0.6
 Django==3.0.8
+django-toolbelt==0.0.1
 future==0.18.2
 gunicorn==20.0.4
 hyperlink==19.0.0
@@ -21,6 +23,7 @@ lxml==4.5.2
 parsel==1.6.0
 Protego==0.1.16
 psycopg2==2.8.5
+pyad==0.5.15
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.20
@@ -37,6 +40,7 @@ service-identity==18.1.0
 six==1.15.0
 soupsieve==2.0.1
 sqlparse==0.3.1
+static3==0.7.0
 Twisted==20.3.0
 urllib3==1.25.10
 w3lib==1.22.0
