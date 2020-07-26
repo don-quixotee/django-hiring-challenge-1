@@ -4,32 +4,25 @@ from bs4 import BeautifulSoup
 from django.http import HttpResponseRedirect
 from .models import Scrawler
 from django.views.generic import ListView
+from django.core.validators import URLValidator
+from django.contrib import messages
+from django.core.exceptions import ValidationError
 
 
-# Create your views here.
-
-# class ScrapeList(ListView):
-#     model = Scrawler
-#     template_name = 'crawl/home/html'
-
-#     def get(self, request, *args, **kwargs):
-#         if request.method == 'POST':
-
-#             site = request.POST.get('site', '')
-
-#             page = requests.get(site)
-#             soup = BeautifulSoup(page.text, 'html.parser')
 
 
 
 def scrape(request):
 
-    if request.method == 'POST':
+    if request.method == 'POST':   
 
+        Scrawler.objects.all().delete()
         site = request.POST.get('site', '')
+        
 
         page = requests.get(site)
         soup = BeautifulSoup(page.text, 'html.parser')
+    
 
         for link in soup.find_all('a'):
             link_address = link.get('href')

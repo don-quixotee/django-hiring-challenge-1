@@ -1,106 +1,135 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>crawlBot</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>crawlBot</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
 
 
-    <style>
-      table {
-        counter-reset: rowNumber;
-      }
-      
-      table tr {
-        counter-increment: rowNumber;
-      }
-      
-      table tr td:first-child::before {
-        content: counter(rowNumber);
-        min-width: 1em;
-        margin-right: 0.5em;
-      }
+  <style>
 
-      .search{
-        background-color: whitesmoke;
-      }
-      .search input[type=text]{
-        width: 100%;
-        height: 50px;
-        margin-top: 100px;
-        margin-bottom: 30px;
-      }
-      
-    </style>
+
+    .search {
+      background-color: whitesmoke;
+      margin-bottom: 2%;
+    }
+
+    .search input[type=url] {
+      width: 100%;
+      height: 50px;
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+  
+  </style>
 </head>
+
 <body>
-    <!-- Image and text -->
-<nav class="navbar navbar-light " style="background-color: #e3f2fd;">
+  <!-- Image and text -->
+  <nav class="navbar navbar-light " style="background-color: #e3f2fd;">
     <a class="navbar-brand" href="#">
       <img src="" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
-      <strong>craw</strong><strong style="color: blue;">L</strong><strong style="color: blue;">B</strong><strong>oot</strong>
+      <strong>craw</strong><strong style="color: blue;">L</strong><strong
+        style="color: blue;">B</strong><strong>ot</strong>
     </a>
   </nav>
 
-    <div style="padding-top:5%"  class="container search ">
+  <div style="padding-top:5%" class="container search ">
+<h1 style="font-weight: bold; text-align:center; font-size:100px"> <strong>craw</strong><strong style="color: blue;">L</strong><strong
+  style="color: blue;">B</strong><strong>ot</strong></h1>
+    <form method="POST">
+      {% csrf_token %}
+      <input type="url" name="site" id="site" placeholder="enter site address" required>
 
-        <form method="POST">
-            {% csrf_token %}
-            <input type="text" name="site" id="site" placeholder="enter site address">
-
-            <div class="mx-auto text-center">
-              <button id="button" name="button" type="submit" class="btn btn-outline-dark">Scrawl!</button>
-          </div>
-
-
-
-            <a href="/delete">Delete</a>
-        </form>
-
-    </div>
-
+      <div class="mx-auto text-center">
+        <button id="button" name="button" type="submit" class="btn btn-outline-dark" >scrape</button>
+      </div>
 
 
 {% if data %}
-<table  class="table table-hover " style="padding:20px" border="1">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">visit</th>
-   
-    </tr>
-  </thead>
-  <tbody>
-  {% for link in data %}
 
-    <tr>
-      <td></td>
-      <td>{{ link.name }}</td>
-      <td>{{ link.webUrl }}</td>
-      <td><a href="{{link.webUrl}}"><button class="btn-sm btn-outline-secondery">visit</button> </a></td>
-    </tr>
-    {% endfor %}
-
-  </tbody>
-</table>
-
-
-<h4> total links  on this page : {{linkCount}}</h4>
-
+      <a href="/delete">Delete</a>
 
 {% endif %}
- 
+    </form>
+{% if data %}
+{% else %}
+<div style="display: flex; justify-content:center; align-items:center; flex-direction:column; padding-top:20px; ">
+      
+  <span style="text-align:justify; color:#4b71c4;">&#x2022; Enter url to scrape all the available links <br>&#x2022; Download Csv File</span>
+
+  
+</div>
+{% endif %}
+  </div>
+
+<!-- progress bar  -->
+
+
+<!-- end progressbar  -->
 
 
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    
+<!-- table -->
+  <div class="container">
+
+
+
+    {% if data %}
+    <table class="table table-hover table-responsive " style="" border="1">
+      <thead>
+        <tr>
+          <th scope="col">0</th>
+          <th scope="col">item</th>
+          <th scope="col">Link</th>
+          <th scope="col">visit</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for link in data %}
+
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{ link.name }}</td>
+          <td>{{ link.webUrl }}</td>
+          <td><a href="{{link.webUrl}}"><button class="btn-sm btn-outline-secondery">visit</button> </a></td>
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+
+    <h4> total links on this page : {{linkCount}}</h4>
+
+
+    {% endif %}
+
+
+
+
+  </div>
+
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+  </script>
+
 </body>
+
 </html>
