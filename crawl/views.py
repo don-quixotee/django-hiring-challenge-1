@@ -1,12 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 import requests
 from bs4 import BeautifulSoup
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from .models import Scrawler
 from django.views.generic import ListView
 from django.core.validators import URLValidator
 from django.contrib import messages
 from django.core.exceptions import ValidationError
+
 
 
 
@@ -45,3 +46,4 @@ def clear(request):
     Scrawler.objects.all().delete()
 
     return HttpResponseRedirect('/')
+
