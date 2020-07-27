@@ -25,6 +25,20 @@
       margin-top: 20px;
       margin-bottom: 30px;
     }
+    .banner{
+      font-weight: bold; 
+      text-align:center; 
+      font-size:100px
+
+    }
+
+    @media screen and (max-width:600px){
+      .banner{
+        font-size:50px;
+
+      }
+     
+    }
   
   </style>
 </head>
@@ -40,7 +54,7 @@
   </nav>
 
   <div style="padding-top:5%" class="container search ">
-<h1 style="font-weight: bold; text-align:center; font-size:100px"> <strong>craw</strong><strong style="color: blue;">L</strong><strong
+<h1 class="banner" > <strong>craw</strong><strong style="color: blue;">L</strong><strong
   style="color: blue;">B</strong><strong>ot</strong></h1>
     <form method="POST">
       {% csrf_token %}
